@@ -5,7 +5,7 @@ firebaseInitialize()
 const auth = getAuth()
 const useFirebase = () =>{
     const [user, setUser] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const singin = () =>{
         setIsLoading(true)
         const provider= new GoogleAuthProvider()
@@ -18,20 +18,35 @@ const useFirebase = () =>{
             .then(()=>{
                 setUser({})
             })
-            setIsLoading(false)
+            .finally(()=> setIsLoading(false))
         }
     useEffect(()=>{
         onAuthStateChanged(auth, user =>{
             if (user) {
                 setUser(user)
               } 
+              setIsLoading(false)
         })
     },[])
+     //user information save to database
+     const saveUser = (email,name) =>{
+        const user = {email, displayName: name}
+        fetch('http://localhost:5000/users',{
+          method: "PUT", 
+          headers: {
+            'content-type' : 'application/json'
+          },
+          body : JSON.stringify(user)
+        })
+        .then()
+     }
     console.log(user)
     return{
         singin,
         user,
-        Logout
+        Logout,
+        saveUser,
+        isLoading
     }
 }
 export default useFirebase;

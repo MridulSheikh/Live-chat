@@ -4,13 +4,15 @@ import { useLocation, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import img from '../../utilities/img/user-icon.png'
 const Login = () => {
-    const {singin} = useAuth();
+    const {singin,saveUser} = useAuth();
     const location = useLocation();
     const Navigate = useNavigate();
     const redirect_uri = location.state?.from || '/home';
     const handleGoogleLogin = () => {
        singin()
         .then(result => {
+            const user = result.user
+            saveUser(user.email , user.displayName)
             Navigate(redirect_uri);
         })
 }
