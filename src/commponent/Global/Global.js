@@ -1,11 +1,18 @@
 import React from 'react';
-import Header from '../Header/Header';
-
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import Post from '../post/Post';
 const Global = () => {
     return (
-        <div>
-            <h1>This is Glosbal section</h1>
-        </div>
+        <Container>
+           <Row className="mt-3">
+           <Col md={6} sm={12}>
+          <Post></Post>
+           </Col>
+           <Col md={6} sm={12}>
+           
+           </Col>
+           </Row>
+        </Container>
     );
 };
 

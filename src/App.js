@@ -9,7 +9,7 @@ import PrivateRoute from './commponent/privateRoute/PrivateRoute';
 import AuthProvider from './context/Context';
 function App() {
   return (
-    <div className="App">
+    <div>
     <AuthProvider>
     <BrowserRouter>
      <Routes>
