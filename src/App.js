@@ -2,11 +2,10 @@ import { BrowserRouter, Routes,Route } from 'react-router-dom';
 import './App.css';
 import Add from './commponent/add/Add';
 import Chat from './commponent/Chat/Chat';
-import Global from './commponent/Global/Global';
 import Homeglobal from './commponent/Global/Homeglobal';
-import Header from './commponent/Header/Header';
 import Home from './commponent/Home/Home';
 import Login from './commponent/login/Login';
+import PrivateRoute from './commponent/privateRoute/PrivateRoute';
 import AuthProvider from './context/Context';
 function App() {
   return (
@@ -14,10 +13,10 @@ function App() {
     <AuthProvider>
     <BrowserRouter>
      <Routes>
-     <Route path="/Chat" element={<Chat></Chat>}></Route>
-     <Route path="/" element={<Home/>}></Route>
-     <Route path="/global" element={<Homeglobal/>}></Route>
-     <Route path="/addFriend" element={<Add />}></Route>
+     <Route path="/Chat" element={<PrivateRoute><Chat></Chat></PrivateRoute>}></Route>
+     <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+     <Route path="/global" element={<PrivateRoute><Homeglobal/></PrivateRoute>}></Route>
+     <Route path="/addFriend" element={<PrivateRoute><Add /></PrivateRoute>}></Route>
      <Route path="/login" element={<Login />}></Route>
      </Routes>
      </BrowserRouter>

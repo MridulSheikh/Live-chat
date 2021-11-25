@@ -5,12 +5,12 @@ firebaseInitialize()
 const auth = getAuth()
 const useFirebase = () =>{
     const [user, setUser] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const singin = () =>{
+        setIsLoading(true)
         const provider= new GoogleAuthProvider()
-        signInWithPopup(auth, provider)
-        .then(result =>{
-           setUser(result.user)
-        })
+        return  signInWithPopup(auth, provider)
+        .finally(()=>setIsLoading(false))
     }
     //log out
     const Logout = ()=>{
@@ -18,6 +18,7 @@ const useFirebase = () =>{
             .then(()=>{
                 setUser({})
             })
+            setIsLoading(false)
         }
     useEffect(()=>{
         onAuthStateChanged(auth, user =>{
